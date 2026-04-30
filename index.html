@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Landing Page</title>
+  <link rel="stylesheet" href="style.css"> <!-- Link to external CSS file for styling the landing page -->
+</head>
+<body>
+
+  <!-- Top Navigation Tab Group; bookmark; gmail; Image; Labs etc.-->
+<div class="top-nav">
+
+  <!--Left Navigation Tab Groups-->
+  <div class="left-nav">
+    <span>Tab Groups</span>
+    <span>All Bookmarks</span>
+  </div>
+
+  <!--Right Navigation Gmail-->
+  <div class="right-nav">
+    <a href="#">Gmail</a>
+    <a href="#">Images</a>
+    <a href="#">Labs</a>
+    <a href="#">Apps</a>
+    <img src="images/profile.png" alt="Profile" class="profile-icon">
+  </div>
+</div>
+
+   <!-- Logo Octavia-->
+  <div class="logo">
+  <span class="blue">O</span>
+  <span class="red">c</span>
+  <span class="yellow">t</span>
+  <span class="blue">a</span>
+  <span class="green">v</span>
+  <span class="red">i</span>
+  <span class="yellow">a</span>
+</div>
+
+
+  <!-- Search bar -->
+ <div class="search-bar">
+    <form action="https://www.google.com/search" method="GET">
+      <div class="input-wrapper">
+        
+        <!-- The name 'q' is required by Google -->
+      <input type="text" name="q" placeholder="Search or type a URL">
+      <button type="button" id="aiButton">AI Mode</button>
+      </div>
+    </form>
+  </div>
+
+<!-- Shortcuts -->
+  <div class="shortcuts">
+    <div class="shortcut">
+      <div class="icon">
+        <img src="images/aidreamina.jpg" alt="AI Dreamina">
+      </div>
+      <span>AI Dreamina</span>
+    </div>
+    <div class="shortcut add-shortcut">
+      <div class="icon">
+        <img src="images/add.jpg" alt="Add shortcut">
+      </div>
+      <span>Add shortcut</span>
+    </div>
+  </div>
+
+<!-- Add Shortcut Modal -->
+<div id="addShortcutModal" class="modal">
+  <div class="modal-content">
+    <h2>Add Shortcut</h2>
+    <label for="shortcutName" style="display:block; margin-left: 25px; text-align: left;">Name:</label>
+      <input type="text" id="shortcutName" placeholder="Shortcut name">
+    <label for="shortcutURL"style="display:block; margin-left: 25px; text-align: left;">URL:</label>
+      <input type="text" id="shortcutURL" placeholder="Shortcut URL">
+    <div class="modal-buttons">
+      <button id="saveShortcut">Save</button>
+      <button id="cancelShortcut">Cancel</button>
+    </div>
+  </div>
+</div>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
