@@ -53,6 +53,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Toggle the 3-dot menu inside each shortcut
+document.querySelectorAll('.menu-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevents clicking the shortcut itself
+    const menu = btn.nextElementSibling;
+    
+    // Close other open menus
+    document.querySelectorAll('.menu-dropdown').forEach(m => {
+      if (m !== menu) m.classList.remove('show');
+    });
+
+    menu.classList.toggle('show');
+  });
+});
+
+// Close menu if clicking anywhere else
+window.addEventListener('click', () => {
+  document.querySelectorAll('.menu-dropdown').forEach(m => m.classList.remove('show'));
+});
+
+// Handle Delete logic
+document.querySelectorAll('.delete-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const shortcut = e.target.closest('.shortcut');
+    if (confirm("Delete this shortcut?")) {
+      shortcut.remove();
+    }
+  });
+});
+
+// Handle Edit logic
+document.querySelectorAll('.edit-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    // You can trigger your "Add Shortcut" modal here to reuse it for editing
+    alert("Edit mode triggered for this shortcut");
+  });
+});
   // Close modal if clicking outside
   window.addEventListener("click", (event) => {
     if (event.target === modal) {

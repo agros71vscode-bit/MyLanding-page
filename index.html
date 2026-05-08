@@ -1,72 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
+<head> <!-- will appear in the main search bar on top of the page -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Landing Page</title>
   <link rel="stylesheet" href="style.css"> <!-- Link to external CSS file for styling the landing page -->
 </head>
-<body>
+
+<body> <!-- What will appear inside the main page contains all the visible content and elements that users will interact with. -->
 
   <!-- Top Navigation Tab Group; bookmark; gmail; Image; Labs etc.-->
-<div class="top-nav">
+  <div class="top-nav">
 
-  <!--Left Navigation Tab Groups-->
-  <div class="left-nav">
-    <span>Tab Groups</span>
-    <span>All Bookmarks</span>
+    <!--Left Navigation Tab Groups-->
+    <div class="left-nav">
+      <span>Tab Groups</span>
+      <span>All Bookmarks</span>
+    </div>
+
+    <!--Right Navigation Gmail-->
+    <div class="right-nav">
+      <a href="#">Aap</a>
+      <a href="#">Gmail</a>
+      <a href="#">Images</a>
+      <a href="#">Labs</a>
+      <a href="#">Apps</a>
+      <img src="images/profile.png" alt="Profile" class="profile-icon">
+    </div>
+
   </div>
 
-  <!--Right Navigation Gmail-->
-  <div class="right-nav">
-    <a href="#">Aap</a>
-    <a href="#">Gmail</a>
-    <a href="#">Images</a>
-    <a href="#">Labs</a>
-    <a href="#">Apps</a>
-    <img src="images/profile.png" alt="Profile" class="profile-icon">
-  </div>
-</div>
-
-   <!-- Logo Octavia-->
+  <!-- Logo Octavia-->
   <div class="logo">
-  <span class="blue">O</span>
-  <span class="red">c</span>
-  <span class="yellow">t</span>
-  <span class="blue">a</span>
-  <span class="green">v</span>
-  <span class="red">i</span>
-  <span class="yellow">a</span>
-</div>
+    <span class="blue">O</span>
+    <span class="red">c</span>
+    <span class="yellow">t</span>
+    <span class="blue">a</span>
+    <span class="green">v</span>
+    <span class="red">i</span>
+    <span class="yellow">a</span>
+  </div>
 
 
   <!-- Search bar -->
- <div class="search-bar">
+  <div class="search-bar">
     <form action="https://www.google.com/search" method="GET">
       <div class="input-wrapper">
         
         <!-- The name 'q' is required by Google -->
-      <input type="text" name="q" placeholder="Search or type a URL">
-      <button type="button" id="aiButton">AI Mode</button>
+        <input type="text" name="q" placeholder="Search or type a URL">
+        <button type="button" id="aiButton">AI Mode</button>
       </div>
     </form>
   </div>
 
-<!-- Shortcuts -->
+  <!-- Shortcuts -->
   <div class="shortcuts">
+  
     <div class="shortcut">
-      <div class="icon">
-        <img src="images/aidreamina.jpg" alt="AI Dreamina">
+      <div class="hover-box"></div> 
+    
+      <div class="menu-container">
+        <button class="menu-btn">⋮</button>
+        
+        <div class="menu-dropdown">
+          <div class="menu-item edit-btn">Edit</div>
+          <div class="menu-item delete-btn">Delete</div>
+        </div>
+      
       </div>
+
+      <div class="icon">
+      <img src="images/aidreamina.jpg" alt="AI Dreamina">
+      </div>
+    
       <span>AI Dreamina</span>
     </div>
-    <div class="shortcut add-shortcut">
-      <div class="icon">
-        <img src="images/add.jpg" alt="Add shortcut">
+  
+  <div class="shortcut add-shortcut">
+    <div class="hover-box"></div>
+    
+    <div class="menu-container">
+      <button class="menu-btn">⋮</button>
+   
+      <div class="menu-dropdown">
+        <div class="menu-item edit-btn">Edit</div>
+        <div class="menu-item delete-btn">Delete</div>
       </div>
-      <span>Add shortcut</span>
+   
     </div>
+
+    <div class="icon">
+      <img src="images/add.jpg" alt="Add shortcut">
+    </div>
+   
+    <span>Add shortcut</span>
+  
   </div>
+
+</div>
 
 <!-- Add Shortcut Modal -->
 <div id="addShortcutModal" class="modal">
