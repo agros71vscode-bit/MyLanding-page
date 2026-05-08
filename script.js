@@ -1,99 +1,103 @@
-document.querySelector("#aiButton").addEventListener("click", () => {
-  alert("AI Mode activated!");
-});
-// This Script is for handling the shortcuts functionality on the landing page. It allows users to add custom shortcuts with a name and URL, which are displayed as clickable tiles on the page. The script also manages the modal dialog for adding shortcuts and ensures that the shortcuts are interactive.
-document.addEventListener("DOMContentLoaded", () => {
-  const shortcutsContainer = document.querySelector(".shortcuts");
-  const addShortcutBtn = document.querySelector(".add-shortcut");
-  const modal = document.getElementById("addShortcutModal");
-  const saveBtn = document.getElementById("saveShortcut");
-  const cancelBtn = document.getElementById("cancelShortcut");
-
-  // Open modal when "Add shortcut" clicked
-  addShortcutBtn.addEventListener("click", () => {
-    modal.style.display = "block";
-  });
-
-  // Close modal
-  cancelBtn.addEventListener("click", () => {
-    modal.style.display = "none";
-  });
-
-  // Save shortcut
-  saveBtn.addEventListener("click", () => {
-    const name = document.getElementById("shortcutName").value.trim();
-    const url = document.getElementById("shortcutURL").value.trim();
-
-    if (name && url) {
-      const shortcut = document.createElement("div");
-      shortcut.classList.add("shortcut");
-
-      const icon = document.createElement("div");
-      icon.classList.add("icon");
-      const img = document.createElement("img");
-      img.src = `https://www.google.com/s2/favicons?domain=${url}`; // Place holder icon
-
-      img.alt = name;
-      icon.appendChild(img);
-
-      const label = document.createElement("span");
-      label.textContent = name;
-
-      shortcut.appendChild(icon);
-      shortcut.appendChild(label);
-
-      shortcut.addEventListener("click", () => {
-        window.location.href = url;
-      });
-
-      shortcutsContainer.insertBefore(shortcut, addShortcutBtn);
-      modal.style.display = "none"; // close modal
-      document.getElementById("shortcutName").value = "";
-      document.getElementById("shortcutURL").value = "";
-    }
-  });
-
-  // Toggle the 3-dot menu inside each shortcut
-document.querySelectorAll('.menu-btn').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation(); // Prevents clicking the shortcut itself
-    const menu = btn.nextElementSibling;
+document.addEventListener('DOMContentLoaded', () => {
+  // --- 1. 3-DOT MENU LOGIC ---
+  
+  // Toggle the dropdown when clicking the 3 dots
+  document.addEventListener('click', (e) => {
+    const menuBtn = e.target.closest('.menu-btn');
     
-    // Close other open menus
-    document.querySelectorAll('.menu-dropdown').forEach(m => {
-      if (m !== menu) m.classList.remove('show');
+    // If clicking a menu button
+    if (menuBtn) {
+      e.preventDefault();
+      e.stopPropagation(); // Stops the shortcut from opening
+      
+      const dropdown = menuBtn.nextElementSibling;
+      
+      // Close all other open menus first
+      document.querySelectorAll('.menu-dropdown').forEach(menu => {
+        if (menu !== dropdown) menu.classList.remove('show');
+      });
+      
+      // Toggle the current menu
+      dropdown.classList.toggle('show');
+    } else {
+      // If clicking anywhere else, close all menus
+      document.querySelectorAll('.menu-dropdown').forEach(menu => {
+        menu.classList.remove('show');
+      });
+    }
+  });
+
+  // --- 2. MENU ITEM ACTIONS (Edit/Delete) ---
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('delete-btn')) {
+      const shortcut = e.target.closest('.shortcut');
+      if (confirm('Are you sure you want to delete this shortcut?')) {
+        shortcut.remove();
+      }
+    }
+    
+    if (e.target.classList.contains('edit-btn')) {
+      const shortcut = e.target.closest('.shortcut');
+      const currentName = shortcut.querySelector('span').innerText;
+      const newName = prompt('Enter new name:', currentName);
+      if (newName) {
+        shortcut.querySelector('span').innerText = newName;
+      }
+    }
+  });
+
+  // --- 3. MODAL LOGIC (Add Shortcut) ---
+  const modal = document.getElementById('addShortcutModal');
+  const addBtn = document.querySelector('.add-shortcut');
+  const cancelBtn = document.getElementById('cancelShortcut');
+  const saveBtn = document.getElementById('saveShortcut');
+
+  // Open Modal
+  if (addBtn) {
+    addBtn.addEventListener('click', () => {
+      modal.style.display = 'block';
     });
+  }
 
-    menu.classList.toggle('show');
-  });
-});
+  // Close Modal (Cancel)
+  if (cancelBtn) {
+    cancelBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+  }
 
-// Close menu if clicking anywhere else
-window.addEventListener('click', () => {
-  document.querySelectorAll('.menu-dropdown').forEach(m => m.classList.remove('show'));
-});
-
-// Handle Delete logic
-document.querySelectorAll('.delete-btn').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    const shortcut = e.target.closest('.shortcut');
-    if (confirm("Delete this shortcut?")) {
-      shortcut.remove();
+  // Close Modal (Clicking outside)
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
     }
   });
-});
 
-// Handle Edit logic
-document.querySelectorAll('.edit-btn').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    // You can trigger your "Add Shortcut" modal here to reuse it for editing
-    alert("Edit mode triggered for this shortcut");
-  });
-});
-  // Close modal if clicking outside
-  window.addEventListener("click", (event) => {
-    if (event.target === modal) {
-      modal.style.display = "none";
-    }
-  });
+  // Save Shortcut Logic
+  if (saveBtn) {
+    saveBtn.addEventListener('click', () => {
+      const name = document.getElementById('shortcutName').value;
+      const url = document.getElementById('shortcutURL').value;
+
+      if (name && url) {
+        // Here you would typically add logic to create a new div element
+        alert('Shortcut saved: ' + name);
+        modal.style.display = 'none';
+        // Clear inputs
+        document.getElementById('shortcutName').value = '';
+        document.getElementById('shortcutURL').value = '';
+      } else {
+        alert('Please fill in both fields.');
+      }
+    });
+  }
+  
+  // --- 4. AI MODE BUTTON ---
+  const aiBtn = document.getElementById('aiButton');
+  if (aiBtn) {
+    aiBtn.addEventListener('click', () => {
+      alert('AI Mode Activated!');
+      // Add your custom AI logic here
+    });
+  }
 });

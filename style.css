@@ -3,7 +3,7 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #ffffff;
   text-align: center;
   overflow-x: hidden; 
@@ -13,27 +13,25 @@ html, body {
 /* 2. TOP NAVIGATION */
 .top-nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end; /* Aligns items to the right like Chrome */
   align-items: center;
   padding: 12px 20px;
-  font-size: 14px;
-  border-bottom: 1px solid #e8eaed;
+  font-size: 13px;
   background: #fff;
-  box-sizing: border-box;
 }
 
-.left-nav span { margin-right: 20px; color: #5f6368; cursor: pointer; }
-.right-nav a { margin-left: 20px; text-decoration: none; color: #5f6368; }
-.profile-icon { width: 32px; height: 32px; border-radius: 50%; margin-left: 20px; vertical-align: middle; }
+.right-nav { display: flex; align-items: center; }
+.right-nav a { margin-left: 15px; text-decoration: none; color: #000; opacity: 0.75; }
+.right-nav a:hover { opacity: 1; text-decoration: underline; }
+.profile-icon { width: 32px; height: 32px; border-radius: 50%; margin-left: 15px; cursor: pointer; }
 
-/* 3. LOGO */
+/* 3. LOGO (Octavia/Google Style) */
 .logo {
   font-size: 92px;
-  font-weight: normal;
-  margin-top: 10vh;
+  font-weight: 500;
+  margin-top: 80px;
   margin-bottom: 30px;
-  font-family: 'Trebuchet MS', sans-serif;
-  letter-spacing: -11px;
+  letter-spacing: -4px; /* Adjusted for better readability */
 }
 .logo .blue { color: #4285f4; }
 .logo .red { color: #ea4335; }
@@ -41,39 +39,47 @@ html, body {
 .logo .green { color: #34a853; }
 
 /* 4. SEARCH BAR */
-.search-bar { display: flex; justify-content: center; padding: 0 10px; width: 100%; box-sizing: border-box; }
-.input-wrapper { position: relative; width: 750px; max-width: 90%; }
+.search-bar { display: flex; justify-content: center; width: 100%; padding: 0 20px; box-sizing: border-box; }
+.input-wrapper { 
+  position: relative; 
+  width: 100%; 
+  max-width: 584px; /* Standard Google search bar width */
+}
 .input-wrapper input {
   width: 100%;
-  box-sizing: border-box;
-  padding: 15px 100px 15px 20px;
+  padding: 12px 140px 12px 20px;
   font-size: 16px;
-  border: 1px solid #dcdcdc;
+  border: 1px solid #dfe1e5;
   border-radius: 24px;
   outline: none;
+  transition: box-shadow 0.2s;
+}
+.input-wrapper input:hover, .input-wrapper input:focus {
+  box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+  border-color: rgba(223,225,229,0);
 }
 .input-wrapper button {
   position: absolute;
-  right: 10px;
+  right: 8px;
   top: 50%;
   transform: translateY(-50%);
-  padding: 6px 12px;
-  font-size: 12px;
+  padding: 7px 16px;
   border: none;
-  border-radius: 12px;
-  background: #4285f4;
-  color: white;
+  border-radius: 18px;
+  background: #f8f9fa;
+  color: #3c4043;
   cursor: pointer;
+  border: 1px solid #f8f9fa;
 }
+.input-wrapper button:hover { border: 1px solid #dadce0; background: #f1f3f4; }
 
 /* 5. SHORTCUTS AREA */
 .shortcuts {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 16px;
   margin-top: 40px;
-  padding: 0 20px;
 }
 
 .shortcut {
@@ -82,40 +88,53 @@ html, body {
   flex-direction: column;
   align-items: center;
   width: 112px;
-  padding: 16px 0;
+  height: 112px;
+  padding: 12px 0;
   cursor: pointer;
   border-radius: 8px;
+  transition: background-color 0.2s;
 }
 
-/* The Hover Box - Added 'pointer-events: none' so it doesn't block clicks */
-.hover-box {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+/* 🔑 This creates the "hover box" effect without extra HTML */
+.shortcut:hover {
   background-color: rgba(60, 64, 67, 0.1);
-  border-radius: 8px;
-  opacity: 0;
-  transition: opacity 0.2s;
-  z-index: 1;
-  pointer-events: none; 
 }
 
-.shortcut:hover .hover-box { opacity: 1; }
+.icon {
+  width: 48px;
+  height: 48px;
+  background-color: #f1f3f4;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.icon img { width: 24px; height: 24px; object-fit: contain; }
 
-/* The 3-dot Menu Container */
+.shortcut span {
+  font-size: 12px;
+  color: #3c4043;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 6. 3-DOT MENU (Fixed & Stable) */
 .menu-container {
   position: absolute;
   top: 4px;
   right: 4px;
-  opacity: 0;      /* Use opacity instead of display:none for smoother transitions */
+  opacity: 0;
   visibility: hidden;
-  z-index: 10;
+  transition: opacity 0.2s, visibility 0.2s;
+  z-index: 5;
 }
 
-/* Logic: Keep menu visible if parent is hovered OR if menu itself is being used */
-.shortcut:hover .menu-container,
-.menu-container:focus-within { 
-  opacity: 1; 
+/* 🔑 Only show menu container when the shortcut box is hovered */
+.shortcut:hover .menu-container {
+  opacity: 1;
   visibility: visible;
 }
 
@@ -126,72 +145,46 @@ html, body {
   height: 28px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 18px;
   color: #5f6368;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 18px;
 }
 
-.menu-btn:hover { background-color: rgba(0, 0, 0, 0.1); }
-
-/* Shortcut Content */
-.icon {
-  width: 60px;
-  height: 60px;
-  background: #f1f3f4;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 8px;
-  position: relative;
-  z-index: 2;
+.menu-btn:hover {
+  background-color: rgba(60, 64, 67, 0.15);
 }
 
-.icon img { width: 24px; height: 24px; }
-
-.shortcut span {
-  position: relative;
-  z-index: 2;
-  font-size: 12px;
-  color: #3c4043;
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Dropdown Menu Style */
+/* Dropdown styling */
 .menu-dropdown {
   display: none;
   position: absolute;
   top: 30px;
   right: 0;
   background: white;
-  box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
   border-radius: 4px;
-  width: 100px;
-  padding: 6px 0;
-  z-index: 11;
+  padding: 4px 0;
+  min-width: 100px;
+  z-index: 10;
 }
-
 .menu-dropdown.show { display: block; }
-.menu-item { padding: 8px 12px; font-size: 14px; text-align: left; color: #3c4043; }
+
+.menu-item {
+  padding: 8px 12px;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
 .menu-item:hover { background-color: #f1f3f4; }
 
-/* 6. MODAL & MEDIA QUERIES */
-.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); }
-.modal-content { background: #fff; margin: 15vh auto; padding: 20px; width: 600px; max-width: 85%; border-radius: 8px; }
+/* 7. MODAL & RESPONSIVE */
+.modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+.modal-content { background: #fff; margin: 15% auto; padding: 20px; border-radius: 8px; width: 400px; }
 
 @media (max-width: 600px) {
-  .logo { font-size: 60px; letter-spacing: -5px; margin-top: 60px; }
-  .left-nav { display: none; }
-  /* Force 3-dots to be visible on mobile because there is no 'hover' */
-  .menu-container { opacity: 1; visibility: visible; }
-}
-
-@media (max-height: 500px) and (orientation: landscape) {
-  .logo { margin-top: 20px; font-size: 45px; }
-  .shortcuts { margin-top: 15px; }
+  .logo { font-size: 60px; margin-top: 40px; }
+  .shortcut { width: 90px; }
+  .menu-container { opacity: 1; visibility: visible; } /* Always show on mobile */
 }
