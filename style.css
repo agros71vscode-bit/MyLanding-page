@@ -1,190 +1,419 @@
-/* 1. GLOBAL RESET & MOBILE SCALING */
+/* ==========================================
+   SOURCE:
+   CSS optimized and structured with assistance from ChatGPT
+   Purpose:
+   - Responsive Android layout
+   - Google-style shortcut hover effect
+   - Hidden 3-dot menu until hover
+   - Responsive search bar behavior
+   - Cleaner UI spacing and alignment
+
+   Compatible with:
+   - Current index.html
+   - Current script.js
+
+   Project: OCTAVIA Landing Page
+   ========================================== */
+
+
+/* ==========================================
+   1. RESET & GLOBAL
+   ========================================== */
+
 html, body {
-  width: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #ffffff;
+  width: 100%;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background-color: #ffffff;
   text-align: center;
-  overflow-x: hidden; 
-  -webkit-text-size-adjust: 100%;
 }
 
-/* 2. TOP NAVIGATION */
+* {
+  box-sizing: border-box;
+}
+
+
+/* ==========================================
+   2. TOP NAVIGATION
+   ========================================== */
+
 .top-nav {
+  width: 100%;
   display: flex;
-  justify-content: flex-end; /* Aligns items to the right like Chrome */
+  justify-content: space-between;
   align-items: center;
-  padding: 12px 20px;
+  padding: 15px 30px;
+}
+
+.left-nav,
+.right-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.left-nav span,
+.right-nav a {
   font-size: 13px;
-  background: #fff;
+  color: #5f6368;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-.right-nav { display: flex; align-items: center; }
-.right-nav a { margin-left: 15px; text-decoration: none; color: #000; opacity: 0.75; }
-.right-nav a:hover { opacity: 1; text-decoration: underline; }
-.profile-icon { width: 32px; height: 32px; border-radius: 50%; margin-left: 15px; cursor: pointer; }
+.right-nav a:hover,
+.left-nav span:hover {
+  text-decoration: underline;
+}
 
-/* 3. LOGO (Octavia/Google Style) */
+.profile-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #dfe1e5;
+  display: block;
+}
+
+
+/* ==========================================
+   3. LOGO
+   ========================================== */
+
 .logo {
-  font-size: 92px;
+  margin-top: 70px;
+  font-size: 110px;
   font-weight: 500;
-  margin-top: 80px;
-  margin-bottom: 30px;
-  letter-spacing: -4px; /* Adjusted for better readability */
+  letter-spacing: -5px;
+  user-select: none;
 }
-.logo .blue { color: #4285f4; }
-.logo .red { color: #ea4335; }
-.logo .yellow { color: #fbbc05; }
-.logo .green { color: #34a853; }
 
-/* 4. SEARCH BAR */
-.search-bar { display: flex; justify-content: center; width: 100%; padding: 0 20px; box-sizing: border-box; }
-.input-wrapper { 
-  position: relative; 
-  width: 100%; 
-  max-width: 584px; /* Standard Google search bar width */
+.logo .blue {
+  color: #4285f4;
 }
+
+.logo .red {
+  color: #ea4335;
+}
+
+.logo .yellow {
+  color: #fbbc05;
+}
+
+.logo .green {
+  color: #34a853;
+}
+
+
+/* ==========================================
+   4. SEARCH BAR
+   ========================================== */
+
+.search-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+  margin-top: 20px;
+}
+
+.search-bar form {
+  width: 100%;
+  max-width: 584px;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
 .input-wrapper input {
   width: 100%;
-  padding: 12px 140px 12px 20px;
-  font-size: 16px;
+  height: 48px;
   border: 1px solid #dfe1e5;
   border-radius: 24px;
+  padding: 0 120px 0 20px;
+  font-size: 16px;
   outline: none;
-  transition: box-shadow 0.2s;
+  transition: box-shadow 0.2s ease;
 }
-.input-wrapper input:hover, .input-wrapper input:focus {
-  box-shadow: 0 1px 6px rgba(32,33,36,0.28);
-  border-color: rgba(223,225,229,0);
+
+.input-wrapper input:hover,
+.input-wrapper input:focus {
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
 }
-.input-wrapper button {
+
+#aiButton {
   position: absolute;
   right: 8px;
   top: 50%;
   transform: translateY(-50%);
-  padding: 7px 16px;
-  border: none;
+  border: 1px solid #dadce0;
+  background-color: #f8f9fa;
   border-radius: 18px;
-  background: #f8f9fa;
-  color: #3c4043;
+  padding: 7px 16px;
+  font-size: 13px;
   cursor: pointer;
-  border: 1px solid #f8f9fa;
+  color: #3c4043;
+  transition: background-color 0.2s ease;
 }
-.input-wrapper button:hover { border: 1px solid #dadce0; background: #f1f3f4; }
 
-/* 5. SHORTCUTS AREA */
+#aiButton:hover {
+  background-color: #f1f3f4;
+}
+
+
+/* ==========================================
+   5. SHORTCUTS SECTION
+   ========================================== */
+
 .shortcuts {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 16px;
+  align-items: flex-start;
+  gap: 25px;
   margin-top: 40px;
+  flex-wrap: wrap;
+  padding: 0 20px;
 }
 
 .shortcut {
-  position: relative;
+  width: 110px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 112px;
-  height: 112px;
-  padding: 12px 0;
+  position: relative;
+  padding: 14px 8px;
+  border-radius: 12px;
+  transition: background-color 0.2s ease;
   cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.2s;
 }
 
-/* 🔑 This creates the "hover box" effect without extra HTML */
+/* GOOGLE-LIKE HOVER BOX */
 .shortcut:hover {
-  background-color: rgba(60, 64, 67, 0.1);
+  background-color: #f1f3f4;
 }
 
 .icon {
-  width: 48px;
-  height: 48px;
-  background-color: #f1f3f4;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
+  background-color: #f1f3f4;
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin-bottom: 8px;
+  align-items: center;
+  margin-bottom: 10px;
 }
-.icon img { width: 24px; height: 24px; object-fit: contain; }
+
+.icon img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 
 .shortcut span {
-  font-size: 12px;
-  color: #3c4043;
-  width: 90%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 13px;
+  color: #202124;
+  word-break: break-word;
 }
 
-/* 6. 3-DOT MENU (Fixed & Stable) */
+
+/* ==========================================
+   6. 3-DOT MENU
+   ========================================== */
+
 .menu-container {
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: 6px;
+  right: 6px;
   opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s, visibility 0.2s;
-  z-index: 5;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
 }
 
-/* 🔑 Only show menu container when the shortcut box is hovered */
+/* SHOW ONLY ON HOVER */
 .shortcut:hover .menu-container {
   opacity: 1;
-  visibility: visible;
+  pointer-events: auto;
 }
 
 .menu-btn {
-  background: none;
   border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+  color: #5f6368;
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  cursor: pointer;
-  color: #5f6368;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
 }
 
 .menu-btn:hover {
-  background-color: rgba(60, 64, 67, 0.15);
+  background-color: #dadce0;
 }
 
-/* Dropdown styling */
 .menu-dropdown {
   display: none;
   position: absolute;
   top: 30px;
   right: 0;
   background: white;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-  border-radius: 4px;
-  padding: 4px 0;
-  min-width: 100px;
-  z-index: 10;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+  overflow: hidden;
+  z-index: 1000;
+  min-width: 120px;
 }
-.menu-dropdown.show { display: block; }
+
+.menu-dropdown.show {
+  display: block;
+}
 
 .menu-item {
-  padding: 8px 12px;
+  padding: 10px 16px;
   font-size: 13px;
   text-align: left;
   cursor: pointer;
 }
-.menu-item:hover { background-color: #f1f3f4; }
 
-/* 7. MODAL & RESPONSIVE */
-.modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
-.modal-content { background: #fff; margin: 15% auto; padding: 20px; border-radius: 8px; width: 400px; }
+.menu-item:hover {
+  background-color: #f1f3f4;
+}
 
-@media (max-width: 600px) {
-  .logo { font-size: 60px; margin-top: 40px; }
-  .shortcut { width: 90px; }
-  .menu-container { opacity: 1; visibility: visible; } /* Always show on mobile */
+
+/* ==========================================
+   7. MODAL
+   ========================================== */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: white;
+  width: 90%;
+  max-width: 400px;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.modal-content input {
+  width: calc(100% - 50px);
+  padding: 10px;
+  margin: 10px 0 20px;
+  border: 1px solid #dfe1e5;
+  border-radius: 8px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.modal-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #1a73e8;
+  color: white;
+}
+
+
+/* ==========================================
+   8. RESPONSIVE MOBILE FIXES
+   ========================================== */
+
+@media (max-width: 768px) {
+
+  .top-nav {
+    padding: 12px 15px;
+    gap: 10px;
+  }
+
+  .left-nav,
+  .right-nav {
+    gap: 12px;
+  }
+
+  .logo {
+    font-size: 72px;
+    margin-top: 50px;
+  }
+
+  .search-bar {
+    padding: 0 15px;
+  }
+
+  .input-wrapper input {
+    font-size: 16px;  /* Keep ≥16px to prevent Android zoom */
+    padding-right: 110px;
+  }
+
+  .shortcuts {
+    gap: 18px;
+    margin-top: 30px;
+  }
+
+  .shortcut {
+    width: 95px;
+  }
+
+  /* Show menu buttons on mobile since hover doesn't work */
+  .menu-container {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+}
+
+
+/* ==========================================
+   9. EXTRA SMALL DEVICES
+   ========================================== */
+
+@media (max-width: 480px) {
+
+  .logo {
+    font-size: 58px;
+  }
+
+  .top-nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .right-nav {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .input-wrapper input {
+    height: 46px;
+    font-size: 16px;  /* Keep ≥16px to prevent Android zoom */
+  }
+
+  #aiButton {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  /* Ensure menu buttons remain visible */
+  .menu-container {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
 }
