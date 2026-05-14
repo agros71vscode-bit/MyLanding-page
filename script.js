@@ -73,17 +73,76 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  function getFaviconUrl(url) {
+    try {
+      const parsedUrl = new URL(url.startsWith('http') ? url : `https://${url}`);
+      return `https://www.google.com/s2/favicons?sz=64&domain=${parsedUrl.hostname}`;
+    } catch (error) {
+      return 'images/add.jpg';
+    }
+  }
+
+  function createShortcutElement(name, url) {
+    const shortcut = document.createElement('div');
+    shortcut.className = 'shortcut';
+
+    const hoverBox = document.createElement('div');
+    hoverBox.className = 'hover-box';
+
+    const menuContainer = document.createElement('div');
+    menuContainer.className = 'menu-container';
+    menuContainer.innerHTML = `
+      <button class="menu-btn">⋮</button>
+      <div class="menu-dropdown">
+        <div class="menu-item edit-btn">Edit</div>
+        <div class="menu-item delete-btn">Delete</div>
+      </div>
+    `;
+
+    const icon = document.createElement('div');
+    icon.className = 'icon';
+
+    const img = document.createElement('img');
+    img.alt = name;
+    img.src = getFaviconUrl(url);
+    img.onerror = () => {
+      img.src = 'images/add.jpg';
+    };
+
+    icon.appendChild(img);
+
+    const label = document.createElement('span');
+    label.textContent = name;
+
+    shortcut.appendChild(hoverBox);
+    shortcut.appendChild(menuContainer);
+    shortcut.appendChild(icon);
+    shortcut.appendChild(label);
+
+    shortcut.addEventListener('click', (event) => {
+      if (!event.target.closest('.menu-container')) {
+        window.open(url.startsWith('http') ? url : `https://${url}`, '_blank');
+      }
+    });
+
+    return shortcut;
+  }
+
   // Save Shortcut Logic
   if (saveBtn) {
     saveBtn.addEventListener('click', () => {
-      const name = document.getElementById('shortcutName').value;
-      const url = document.getElementById('shortcutURL').value;
+      const name = document.getElementById('shortcutName').value.trim();
+      const url = document.getElementById('shortcutURL').value.trim();
+      const shortcutsContainer = document.querySelector('.shortcuts');
 
       if (name && url) {
-        // Here you would typically add logic to create a new div element
+        const newShortcut = createShortcutElement(name, url);
+        if (shortcutsContainer && addBtn) {
+          shortcutsContainer.insertBefore(newShortcut, addBtn);
+        }
+
         alert('Shortcut saved: ' + name);
         modal.style.display = 'none';
-        // Clear inputs
         document.getElementById('shortcutName').value = '';
         document.getElementById('shortcutURL').value = '';
       } else {
