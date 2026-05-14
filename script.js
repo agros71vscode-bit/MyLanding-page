@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     img.alt = name;
     img.src = getFaviconUrl(url);
     img.onerror = () => {
-      img.src = 'images/add.jpg';
+      img.src = './images/add.jpg';
     };
 
     icon.appendChild(img);
