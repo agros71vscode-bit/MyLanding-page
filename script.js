@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('Landing page script loaded');
   // --- 1. 3-DOT MENU LOGIC ---
   
   // Toggle the dropdown when clicking the 3 dots
