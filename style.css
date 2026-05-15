@@ -95,6 +95,13 @@ html, body {
   margin-left: 8px;
 }
 
+.profile-menu {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
 .profile-icon {
   width: 32px;
   height: 32px;
@@ -102,6 +109,47 @@ html, body {
   object-fit: cover;
   border: 1px solid #dfe1e5;
   display: block;
+}
+
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 220px;
+  background: #ffffff;
+  border: 1px solid #dadce0;
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(32, 33, 36, 0.16);
+  display: none;
+  z-index: 20;
+}
+
+.profile-dropdown.show {
+  display: block;
+}
+
+.profile-user {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e8eaed;
+  font-size: 14px;
+  color: #202124;
+  text-align: left;
+  word-break: break-word;
+}
+
+.profile-dropdown-item {
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #202124;
+  text-align: left;
+  cursor: pointer;
+}
+
+.profile-dropdown-item:hover {
+  background-color: #f1f3f4;
 }
 
 
@@ -160,11 +208,77 @@ html, body {
   width: 100%;
   height: 48px;
   border: 1px solid #dfe1e5;
-  border-radius: 24px;
-  padding: 0 120px 0 20px;
+  border-radius: 999px;
+  padding: 0 160px 0 52px;
   font-size: 16px;
   outline: none;
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.input-wrapper input:focus {
+  border-color: rgba(66, 133, 244, 0.6);
+  box-shadow: 0 2px 10px rgba(66, 133, 244, 0.15);
+}
+
+.search-action {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  color: #5f6368;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-action:hover,
+.search-action.active {
+  background-color: rgba(60, 64, 67, 0.08);
+}
+
+.search-icon {
+  left: 14px;
+}
+
+.camera-btn {
+  right: 146px;
+}
+
+.mic-btn {
+  right: 100px;
+}
+
+.search-action svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+#aiButton {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid #dadce0;
+  background-color: #ffffff;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #3c4043;
+  z-index: 2;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.1);
+}
+
+#aiButton:hover {
+  background-color: #f1f3f4;
 }
 
 .input-wrapper input:hover,

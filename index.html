@@ -32,7 +32,14 @@
       <a href="#">Images</a>
       <a href="#">Labs</a>
       <a href="#">Apps</a>
-      <img src="images/profile.png" alt="Profile" class="profile-icon">
+      <div class="profile-menu" id="profileMenu">
+        <img src="./images/add.jpg" alt="Profile" class="profile-icon" id="profileIcon">
+        <div class="profile-dropdown" id="profileDropdown" aria-hidden="true">
+          <div class="profile-user" id="profileUserName">Not signed in</div>
+          <button type="button" id="profileSignOut" class="profile-dropdown-item">Sign out</button>
+          <button type="button" id="profileSwitchAccount" class="profile-dropdown-item">Use another account</button>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -51,17 +58,30 @@
 
   <!-- Search bar -->
   <div class="search-bar">
-    <form action="https://www.google.com/search" method="GET">
+    <form id="searchForm" action="https://www.google.com/search" method="GET">
       <div class="input-wrapper">
         
         <!-- The name 'q' is required by Google -->
-        <input type="text" name="q" placeholder="Search or type a URL">
+        <input id="searchInput" type="text" name="q" placeholder="Search or type a URL">
+        <button type="button" class="search-action search-icon" id="searchIcon" aria-label="Search">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C8.01 14 6 11.99 6 9.5S8.01 5 10.5 5 15 7.01 15 9.5 12.99 14 10.5 14z"/>
+          </svg>
+        </button>
+        <button type="button" class="search-action camera-btn" id="cameraButton" aria-label="Search by image">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+            <path d="M20 5h-3.17l-1.84-2H8.99L7.15 5H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-8 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8.5c-1.93 0-3.5 1.57-3.5 3.5S8.07 16.5 10 16.5 13.5 14.93 13.5 13 11.93 9.5 10 9.5z"/>
+          </svg>
+        </button>
+        <button type="button" class="search-action mic-btn" id="micButton" aria-label="Voice search">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V22h2v-2.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+          </svg>
+        </button>
         <button type="button" id="aiButton">AI Mode</button>
       </div>
     </form>
   </div>
-
-  <!-- Shortcuts -->
   <div class="shortcuts">
   
     <div class="shortcut">
